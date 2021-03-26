@@ -107,6 +107,17 @@ function createCategoriesButton(menuItems) {
 }
 
 
+function filterItems(category) {
+    categoryClicked = category.id
+    let menuItemsList = menu.filter(function(item) {
+        if (item.category == categoryClicked) {
+            return item
+        }
+    })
+    displayMenuItems(menuItemsList)
+}
+
+
 function displayMenuItems(menuItems) {
     //loop through all the item in menu and return the html txt, adding it as a list item into the menuItemsList
     let menuItemsList = menu.map(function(item) {
@@ -134,31 +145,4 @@ var filterButtons;
 
 function attachFilterButtons() {
     filterButtons = document.querySelectorAll(".btn-filter")
-}
-
-
-
-function filterItems(category) {
-    categoryClicked = category.id
-
-    let menuItemsList = menu.map(function(item) {
-            if (item.category == categoryClicked) {
-
-                return `<article class="menu-item">
-    <img src=${item.img} class="photo" alt="${item.desc}">
-    <div class="item-info">
-        <header>
-            <h4>${item.title}</h4>
-            <h4 class="price">${item.price}</h4>
-        </header>
-        <p class="item-text">${item.desc}</p>
-    </div>
-</article>`
-            }
-        })
-        //Put all items in the list  as one single string
-    menuItemsList = menuItemsList.join("")
-    console.log(menuItemsList)
-        //Put the string above inside the html tag div class=section-center
-    menuDivTag.innerHTML = menuItemsList
 }
